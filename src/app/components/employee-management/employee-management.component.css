@@ -1,0 +1,46 @@
+.allCards{
+    display: flex;
+    flex-direction: row;
+}
+.example-card{
+    width: 350px;
+    height: 90px;
+    background-color: white;
+    border: 0px;
+    margin: 20px;
+}
+
+.cardImage{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    justify-content: center;
+}
+
+.icon-class{
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    color: #328DF6;
+}
+
+.bgColor {
+    background-color: white;
+}
+
+mat-card-title{
+    color: #328DF6;
+    font-weight: bold;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}

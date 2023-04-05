@@ -1,0 +1,100 @@
+.formDailogBox{
+    width: 98%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid red;
+}
+
+.header{
+    width: 100%;
+    height: 7%;
+    border: 1px solid green;
+}
+
+.content{
+    width: 100%;
+    height: 90%;
+    border: 1px solid black;
+}
+
+/* Aside Content */
+.asideContent{
+    width: 50%;
+    height: 100%;
+    border: 1px solid rgb(220, 163, 49);
+}
+.profile-photo{
+    width: 100%;
+    height: 40%;
+    border:1px solid red;
+    background-color: grey;
+}
+.emp-image{
+   width: 100%;
+   height: 100%;
+}
+.emp-image img{
+    width: 110px;
+    height: 120px;
+}
+
+
+
+
+
+.example-form {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+
+
+.mainContent{
+    width: 70%;
+    height: 100%;
+    border: 1px solid rgb(158, 128, 90);
+}
+
+
+/* For buttons */
+.footer{
+    width: 100%;
+    height: 7%;
+    border: 1px solid blue;
+}
+
+.example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+}
+
+.example-button-row {
+    display: table-cell;
+    max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+}
+
+
+

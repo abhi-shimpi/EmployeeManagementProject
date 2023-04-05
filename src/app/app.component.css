@@ -1,0 +1,20 @@
+
+.main-wrapper{
+        background-color: #f5f5f5;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+}
+.container-wrapper{
+        width: 100%;
+        display: flex;
+}
+.sidebar-wrapper{
+        width: 7%;
+}
+
+.content-wrapper{
+        width: 92%;
+        margin-top: 60px;
+}

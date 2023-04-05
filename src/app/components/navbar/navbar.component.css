@@ -1,0 +1,25 @@
+.nav{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 64px;
+    width: 100%;
+    float: right;
+    position: fixed;
+    z-index: 1;
+    border-bottom: 1px solid #E8E9EE;
+    background-color: rgba(255, 255, 255, 255);
+}
+.notification,.profile{
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    background-color: rgba(255, 255, 255, 255);
+}
+i{
+    font-size: 30px;
+    vertical-align: middle;
+}
