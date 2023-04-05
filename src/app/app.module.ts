@@ -14,7 +14,6 @@ import { LineChartComponent } from './components/dashboard/line-chart/line-chart
 import { AreaChartComponent } from './components/dashboard/area-chart/area-chart.component';
 import { GaugeChartComponent } from './components/dashboard/gauge-chart/gauge-chart.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormDialogBoxComponent } from './dialog/form-dialog-box/form-dialog-box.component';
 
 import { Route, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddEmployeeComponent } from './dialog/add-employee/add-employee.component';
 
 //1st - angular
 // 2nd -  material
@@ -50,8 +50,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LineChartComponent,
     AreaChartComponent,
     GaugeChartComponent,
-    FormDialogBoxComponent,
     DashboardComponent,
+    AddEmployeeComponent,
   ],
   imports: [
     BrowserModule,

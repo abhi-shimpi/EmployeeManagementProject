@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormDialogBoxComponent } from 'src/app/dialog/form-dialog-box/form-dialog-box.component';
+import { AddEmployeeComponent } from 'src/app/dialog/add-employee/add-employee.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
 
@@ -32,7 +32,7 @@ export class EmployeeManagementComponent {
 
   openUserDialog()
    {
-    const dialogRef = this.dialog.open(FormDialogBoxComponent, {
+    const dialogRef = this.dialog.open(AddEmployeeComponent, {
       width: '70%',
 
       height: '100vh',
