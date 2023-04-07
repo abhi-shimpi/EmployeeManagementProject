@@ -16,32 +16,35 @@ export interface Fruit {
 })
 export class AddEmployeeComponent {
   urlLink: string = 'assets/profile-pic.png';
-  employeeForm:FormGroup;
-  role:Array<any> = ['Inter','sw','ssw'];
-  gender:Array<any> = ['male','female'];
-  bloodGroupArray:Array<any> = ['A+','B+'];
+  employeeForm: FormGroup;
+  role: Array<any> = ['Inter', 'sw', 'ssw'];
+  gender: Array<any> = ['male', 'female'];
+  bloodGroupArray: Array<any> = ['A+', 'B+'];
+  fileName='';
 
   constructor(public dialogRef: MatDialogRef<AddEmployeeComponent>) {
     this.employeeForm = new FormGroup({
-      generalDetails:new FormGroup({
-
-      }),
-      personalDetails:new FormGroup({
-        fullName:new FormControl(null),
-        dateOfBirth:new FormControl(null),
+      generalDetails: new FormGroup({}),
+      personalDetails: new FormGroup({
+        fullName: new FormControl(null),
+        dateOfBirth: new FormControl(null),
         langauge: new FormControl(null),
         skills: new FormControl(null),
-        role:new FormControl(null),
-        gender:new FormControl(null),
-        maritalStatus:new FormControl(null),
-        bloodGroup:new FormControl(null),
-        type:new FormControl(null)
-
+        role: new FormControl(null),
+        gender: new FormControl(null),
+        maritalStatus: new FormControl(null),
+        bloodGroup: new FormControl(null),
+        type: new FormControl(null),
       }),
-      contactDetails:new FormGroup({
-
-      })
-    })
+      contactDetails: new FormGroup({
+        email: new FormControl(null),
+        phoneNumber: new FormControl(null),
+        currentCity: new FormControl(null),
+        homeTown: new FormControl(null),
+        currentAddress: new FormControl(null),
+        residentialAdress: new FormControl(null),
+      }),
+    });
   }
 
   updateProfileImage(event: any) {
@@ -57,14 +60,14 @@ export class AddEmployeeComponent {
   //Code for Handling Chips Input
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
+  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     // Add our fruit
     if (value) {
-      this.fruits.push({name: value});
+      this.fruits.push({ name: value });
     }
 
     // Clear the input value

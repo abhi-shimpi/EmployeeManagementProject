@@ -2,84 +2,152 @@
   width: 100%;
   height: 100%;
   background-color: white;
-  border: 1px solid red;
+  //   border: 1px solid red;
+  overflow: auto;
 
   /* Header */
   .header {
     width: 100%;
     height: 7%;
-    border: 1px solid green;
+    // border: 1px solid green;
+  }
+
+  .all-headers {
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 32px;
+    padding: 10px;
   }
 
   /* add employee form */
   .add-employee-form {
     width: 100%;
-    height: 90%;
-  }
-
-  .content {
-    width: 100%;
     height: 100%;
-    border: 1px solid black;
-  }
+    border: 2px solid #e8e9ee;
 
-  /* Aside Content */
-  .aside-content-wrap {
-    width: 30%;
-    height: 100%;
-    border: 1px solid rgb(220, 163, 49);
-  }
+    .content {
+      width: 100%;
+      height: 100%;
+    }
 
-  .profile-photo {
-    width: 100%;
-    height: 40%;
-    border: 1px solid red;
-    background-color: grey;
-  }
-
-  .emp-image {
-    width: 100%;
-    height: 100%;
-  }
-
-  .emp-image img {
-    width: 110px;
-    height: 120px;
-  }
-
-  .aside-form {
-    min-width: 100%;
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .input-full-width {
-    width: 100%;
-  }
-
-  /* Main content */
-  .main-content-wrap {
-    width: 70%;
-    height: 100%;
-    border: 1px solid rgb(158, 128, 90);
-
-    .row {
+    /* Aside Content */
+    .aside-content-wrap {
+      width: 30%;
+      height: 100%;
       display: flex;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
 
-      mat-form-field {
-        width: 100%;
+      .profile-and-emp-info-wrapper {
+        width: 80%;
+        height: 90%;
+        padding: 10px;
+        border: 2px solid #e8e9ee;
+
+        .profile-photo {
+          height: 40%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .file-input {
+            display: none;
+          }
+
+          img {
+            width: 130px;
+            height: 160px;
+          }
+        }
+
+        .input-full-width {
+          width: 100%;
+        }
       }
     }
 
-    .all-tabs-wrapper{
-      // border: 1px solid red;
+    /* Main content */
+    .main-content-wrap {
+      width: 70%;
+      height: 100%;
+
+      .personal-details-wrapper,
+      .contact-details-wrapper {
+        border: 2px solid #e8e9ee;
+        border-radius: 7px;
+        margin: 6px;
+      }
+
+      .personal-details-wrapper {
+        height: 430px;
+
+        .personal-details-form {
+          height: 80%;
+          width: 90%;
+          margin: auto;
+          overflow: auto;
+
+          .row {
+            display: flex;
+            gap: 10px;
+
+            mat-form-field {
+              width: 45%;
+            }
+          }
+        }
+      }
+
+      .contact-details-wrapper {
+        height: 240px;
+        overflow: auto;
+        //   border: 1px solid blue;
+
+        .contact-details-form {
+          height: 80%;
+          width: 90%;
+          overflow: auto;
+          margin: auto;
+
+          .row {
+            display: flex;
+            gap: 10px;
+
+            mat-form-field {
+              width: 45%;
+            }
+          }
+        }
+      }
+    }
+
+    /* For buttons */
+    .footer {
+      height: 7%;
+
+      .form-button-row {
+        display: flex;
+        justify-content: end;
+      }
+      // border: 1px solid blue;
     }
   }
+}
+.add-employee-wrap::-webkit-scrollbar {
+  display: none;
+}
 
-  /* For buttons */
-  .footer {
-    height: 7%;
-    border: 1px solid blue;
-  }
+.contact-details-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.contact-details-form::-webkit-scrollbar {
+  display: none;
+}
+
+.personal-details-form::-webkit-scrollbar {
+  display: none;
 }

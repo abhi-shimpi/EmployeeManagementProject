@@ -1,45 +1,52 @@
 <div fxLayout="column" class="add-employee-wrap">
-    <div class="header">
-        <h1>Employee Details</h1>
+    <div class="header ">
+        <h1 class="all-headers">Employee Details</h1>
     </div>
     <form [formGroup]="employeeForm" class="add-employee-form">
         <div fxLayout="row" class="content">
-            <div class="aside-content-wrap" fxLayout="column">
-                <div class="profile-photo">
-                    <div class="emp-image" fxLayout="column" fxLayoutAlign="center center">
+            <div class="aside-content-wrap">
+                <div class="profile-and-emp-info-wrapper">
+                    <div class="profile-photo">
                         <img [src]="urlLink" alt="Profile image">
-                        <input type="file" (click)="updateProfileImage($event)">
+                        <!-- <input type="file" (click)="updateProfileImage($event)"> -->
+                        <input type="file" class="file-input" (change)="updateProfileImage($event)" #fileUpload>
+
+                        <div class="file-upload">
+                            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="employee-info">
-                    <div class="aside-form">
-                        <mat-form-field class="input-full-width">
-                            <mat-label>Favorite food</mat-label>
-                            <input matInput placeholder="Ex. Pizza" value="Sushi">
-                        </mat-form-field>
-                        <mat-form-field class="input-full-width">
-                            <mat-label>Department</mat-label>
-                            <input matInput placeholder="" value="-">
-                        </mat-form-field>
-                        <mat-form-field class="input-full-width">
-                            <mat-label>Department</mat-label>
-                            <input matInput placeholder="" value="-">
-                        </mat-form-field>
+                    <div>
+                        <div class="aside-form">
+                            <mat-form-field class="input-full-width">
+                                <mat-label>Favorite food</mat-label>
+                                <input matInput placeholder="Ex. Pizza" value="Sushi">
+                            </mat-form-field>
+                            <mat-form-field class="input-full-width">
+                                <mat-label>Department</mat-label>
+                                <input matInput placeholder="" value="-">
+                            </mat-form-field>
+                            <mat-form-field class="input-full-width">
+                                <mat-label>Department</mat-label>
+                                <input matInput placeholder="" value="-">
+                            </mat-form-field>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="main-content-wrap">
-                    <mat-tab-group animationDuration="0ms" class="all-tabs-wrapper">
-                        <mat-tab label="Personal & Contact Details">
-                            <div class="personal-details-wrapper" formGroupName="personalDetails">
-                                <div class="main-content-header">
-                                    <h2>Personal Details</h2>
-                                </div>
+                <mat-tab-group animationDuration="0ms" class="all-tabs-wrapper">
+                    <mat-tab label="Personal & Contact Details">
+                        <div class="personal-details-wrapper" formGroupName="personalDetails">
+                            <div class="personal-details-header">
+                                <h2 class="all-headers">Personal Details</h2>
+                            </div>
+                            <div class="personal-details-form">
                                 <div class="row">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Full name</mat-label>
-                                        <input id="firstName" matInput type="text" placeholder="Ex. Technical"
-                                            formControlName="fullName">
+                                        <input id="firstName" matInput type="text" placeholder="Ex. Technical" formControlName="fullName">
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Date of Birth</mat-label>
@@ -52,59 +59,57 @@
                                 <div class="row">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Language</mat-label>
-                                        <input id="langauge" matInput type="text" placeholder="Ex. Technical"
-                                            formControlName="langauge">
+                                        <input id="langauge" matInput type="text" placeholder="Ex. Technical" formControlName="langauge">
                                     </mat-form-field>
-                                    <mat-form-field class="example-chip-list" appearance="fill">
+                                    <mat-form-field class="example-chip-list" appearance="outline">
                                         <mat-label>Favorite Fruits</mat-label>
                                         <mat-chip-grid #chipGrid aria-label="Enter fruits">
-                                            <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)"
-                                                [editable]="true" (edited)="edit(fruit, $event)"
-                                                [aria-description]="'press enter to edit ' + fruit.name">
+                                            <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)" [editable]="true"
+                                                (edited)="edit(fruit, $event)" [aria-description]="'press enter to edit ' + fruit.name">
                                                 {{fruit.name}}
                                                 <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
                                                     <mat-icon>cancel</mat-icon>
                                                 </button>
                                             </mat-chip-row>
                                             <input formControlName="skills" placeholder="New fruit..." [matChipInputFor]="chipGrid"
-                                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                                [matChipInputAddOnBlur]="addOnBlur"
+                                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                                                 (matChipInputTokenEnd)="add($event)" />
                                         </mat-chip-grid>
                                     </mat-form-field>
                                 </div>
-
-                                <div class="row">
-                                        <mat-form-field appearance="outline">
-                                            <mat-label>Role</mat-label>
-                                            <mat-select formControlName="role">
-                                                <mat-option  value="option">Option</mat-option>
-                                            </mat-select>
-                                            <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
-                                        </mat-form-field>
-                                        <mat-form-field appearance="outline">
-                                            <mat-label>Gender</mat-label>
-                                            <mat-select formControlName="gender">
-                                                <mat-option value="option">Option</mat-option>
-                                            </mat-select>
-                                            <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
-                                        </mat-form-field>
-                                </div>
-
+                                
                                 <div class="row">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Marital Status</mat-label>
-                                        <input formControlName="maritalStatus"  matInput type="text" placeholder="Ex. Technical" formControlName="fullName">
+                                        <mat-label>Role</mat-label>
+                                        <mat-select formControlName="role">
+                                            <mat-option value="option">Option</mat-option>
+                                        </mat-select>
+                                        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Blood Group</mat-label>
-                                        <mat-select formControlName="bloodGroup">
-                                            <mat-option  value="option">Option</mat-option>
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select formControlName="gender">
+                                            <mat-option value="option">Option</mat-option>
                                         </mat-select>
                                         <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
                                     </mat-form-field>
                                 </div>
-
+                                
+                                <div class="row">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Marital Status</mat-label>
+                                        <input formControlName="maritalStatus" matInput type="text" placeholder="Ex. Technical"
+                                            formControlName="fullName">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Blood Group</mat-label>
+                                        <mat-select formControlName="bloodGroup">
+                                            <mat-option value="option">Option</mat-option>
+                                        </mat-select>
+                                        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                
                                 <div class="row">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Type</mat-label>
@@ -112,11 +117,51 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <div class="contact-details-wrapper"></div>
-                        </mat-tab>
-                        <mat-tab label="Second">Content 2</mat-tab>
-                        <mat-tab label="Third">Content 3</mat-tab>
-                    </mat-tab-group>
+                        </div>
+                        <div class="contact-details-wrapper" formGroupName="contactDetails">
+                            <div class="main-content-header">
+                                <h2 class="all-headers">Contact Details</h2>
+                            </div>
+                            <div class="contact-details-form">
+                                <div class="row">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Phone Number</mat-label>
+                                        <input matInput placeholder="Ex. 9078462389" type="number" formControlName="phoneNumber">
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="row">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Current City</mat-label>
+                                        <input matInput type="text" placeholder="Ex. Jalgoan" formControlName="currentCity">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Current City</mat-label>
+                                        <input matInput type="text" placeholder="Ex. Jalgoan" formControlName="homeTown">
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="row">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Current Address</mat-label>
+                                        <input matInput type="text" placeholder="Ex. Jalgoan" formControlName="currentAddress">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Residential Address</mat-label>
+                                        <input matInput type="text" placeholder="Ex. Jalgoan" formControlName="residentialAdress">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Second">Content 2</mat-tab>
+                    <mat-tab label="Third">Content 3</mat-tab>
+                </mat-tab-group>
             </div>
         </div>
         <div class="footer">
@@ -127,3 +172,9 @@
         </div>
     </form>
 </div>
+
+
+
+<!-- 
+    1) Input field single row
+ -->
