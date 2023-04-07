@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { AddEmployeeComponent } from 'src/app/dialog/add-employee/add-employee.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ViewEncapsulation } from '@angular/core';
+// import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-employee-management',
   templateUrl: './employee-management.component.html',
-  styleUrls: ['./employee-management.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./employee-management.component.scss'],
+  // encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeManagementComponent {
   cardDetailsArr: Array<any> = [
@@ -30,13 +30,10 @@ export class EmployeeManagementComponent {
 
   constructor(public dialog: MatDialog) {}
 
-  openUserDialog()
-   {
+  openUserDialog() {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      width: '70%',
-
-      height: '100vh',
-
+      width: '80%',
+      height: '100%',
       position: { right: '10px', top: '0px' },
     });
 

@@ -1,16 +1,16 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  styleUrls: ['./bar-chart.component.scss'],
 })
-export class BarChartComponent implements OnInit{
+export class BarChartComponent implements OnInit {
   ngOnInit(): void {
     type EChartsOption = echarts.EChartsOption;
 
-    var chartDom = document.getElementById('barChart')!;
+    var chartDom = document.getElementById('bar-chart')!;
     var myChart = echarts.init(chartDom);
     var option: EChartsOption;
 
@@ -35,6 +35,5 @@ export class BarChartComponent implements OnInit{
     };
 
     option && myChart.setOption(option);
-
   }
 }

@@ -1,0 +1,14 @@
+.nav {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 64px;
+  border-bottom: 1px solid #e8e9ee;
+  background-color: rgba(255, 255, 255, 255);
+
+  .notification,
+  .profile {
+    display: flex;
+    margin: 15px;
+  }
+}

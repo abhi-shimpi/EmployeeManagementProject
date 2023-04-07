@@ -1,31 +1,15 @@
-<div class="allCards">
-    <div *ngFor="let obj of cardDetailsArr">
-        <mat-card class="example-card bgColor">
-            <mat-card-header class="bgColor">
-                <mat-card-title-group class="bgColor">
-                    <mat-card-subtitle class="bgColor">{{obj.cardSubtitle}}</mat-card-subtitle>
-                    <mat-card-title class="bgColor">{{obj.cardTitle}}</mat-card-title>
-                    <div class="cardImage">
-                        <mat-icon class="icon-class">{{obj.cardimage}}</mat-icon>
-                        
+<div class="all-cards">
+    <div *ngFor="let obj of cardDetailsArr" class="single-card">
+        <mat-card class="card background-white">
+                <mat-card-title-group class="background-white" >
+                    <mat-card-subtitle class="background-white">{{obj.cardSubtitle}}</mat-card-subtitle>
+                    <mat-card-title class="background-white">{{obj.cardTitle}}</mat-card-title>
+                    <div class="card-image">
+                        <mat-icon class="icon-class">{{obj.cardimage}}</mat-icon> 
                     </div>
                 </mat-card-title-group>
-            </mat-card-header>
         </mat-card>
     </div>
 </div>
 
-
-
-<a  (click)="openUserDialog()">Open Confirm Dialog</a>
-<hr>
-<form class="example-form">
-
-
-<mat-form-field class="example-full-width">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-</mat-form-field>
-</form>
-
-<br>
+<a (click)="openUserDialog()">Open Confirm Dialog</a>

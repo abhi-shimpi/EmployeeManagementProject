@@ -1,16 +1,24 @@
-.allCards{
+//Chips Management
+.all-cards{
     display: flex;
+    width: 100%;
+    margin: 20px;
     flex-direction: row;
 }
-.example-card{
-    width: 350px;
+
+.single-card{
+    width: 100%;
+}
+.card{
+    width: 90%;
     height: 90px;
     background-color: white;
     border: 0px;
-    margin: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
-
-.cardImage{
+.card-image{
     width: 50px;
     height: 50px;
     display: flex;
@@ -26,7 +34,7 @@
     color: #328DF6;
 }
 
-.bgColor {
+.background-white {
     background-color: white;
 }
 

@@ -1,0 +1,85 @@
+.add-employee-wrap {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 1px solid red;
+
+  /* Header */
+  .header {
+    width: 100%;
+    height: 7%;
+    border: 1px solid green;
+  }
+
+  /* add employee form */
+  .add-employee-form {
+    width: 100%;
+    height: 90%;
+  }
+
+  .content {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+  }
+
+  /* Aside Content */
+  .aside-content-wrap {
+    width: 30%;
+    height: 100%;
+    border: 1px solid rgb(220, 163, 49);
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 40%;
+    border: 1px solid red;
+    background-color: grey;
+  }
+
+  .emp-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .emp-image img {
+    width: 110px;
+    height: 120px;
+  }
+
+  .aside-form {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .input-full-width {
+    width: 100%;
+  }
+
+  /* Main content */
+  .main-content-wrap {
+    width: 70%;
+    height: 100%;
+    border: 1px solid rgb(158, 128, 90);
+
+    .row {
+      display: flex;
+      gap: 10px;
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+
+    .all-tabs-wrapper{
+      // border: 1px solid red;
+    }
+  }
+
+  /* For buttons */
+  .footer {
+    height: 7%;
+    border: 1px solid blue;
+  }
+}
