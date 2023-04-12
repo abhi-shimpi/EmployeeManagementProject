@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +18,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator'
+import {MatSortModule} from '@angular/material/sort'
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,6 +61,8 @@ import { AddEmployeeComponent } from './dialog/add-employee/add-employee.compone
     RouterModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
+    NgSelectModule,
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
@@ -68,8 +76,15 @@ import { AddEmployeeComponent } from './dialog/add-employee/add-employee.compone
     MatChipsModule,
     MatSelectModule,
     MatTabsModule,
+    MatBadgeModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  // ngDoBootstrap()
+}

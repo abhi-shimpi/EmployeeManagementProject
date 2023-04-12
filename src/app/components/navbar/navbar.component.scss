@@ -2,13 +2,30 @@
   display: flex;
   justify-content: end;
   align-items: center;
+  flex-wrap: wrap;
   height: 64px;
+  width: 100vw;
   border-bottom: 1px solid #e8e9ee;
   background-color: rgba(255, 255, 255, 255);
 
-  .notification,
-  .profile {
+  .nav-logos {
     display: flex;
     margin: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Styles for screens less than or equal to 768px wide */
+
+  .nav {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Styles for screens less than or equal to 768px wide */
+
+  .nav {
+    width: 100%;
   }
 }

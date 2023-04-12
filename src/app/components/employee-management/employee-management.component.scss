@@ -1,54 +1,255 @@
-//Chips Management
-.all-cards{
+.employee-management-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  margin: 0px 20px;
+
+  //Chips Management
+  .all-cards {
     display: flex;
-    width: 100%;
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 20px 0px;
     flex-direction: row;
-}
 
-.single-card{
-    width: 100%;
-}
-.card{
-    width: 90%;
-    height: 90px;
+    .single-card {
+      width: 100%;
+
+      .card {
+        width: 90%;
+        height: 90px;
+        background-color: white;
+        border: 0px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+
+        .card-image {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          border-radius: 7px;
+          justify-content: center;
+        }
+
+        .icon-class {
+          font-size: 30px;
+          width: 30px;
+          height: 30px;
+          color: #328df6;
+        }
+
+        .background-white {
+          background-color: white;
+        }
+
+        mat-card-title {
+          color: #328df6;
+          font-weight: bold;
+        }
+
+        .example-form {
+          min-width: 150px;
+          max-width: 500px;
+          width: 100%;
+        }
+
+        .example-full-width {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  //Employee Table and cards
+  .employee-details-wrapper {
+    width: calc(100% - 40px);
     background-color: white;
-    border: 0px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
-.card-image{
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border-radius: 7px;
-    justify-content: center;
+
+    .employee-details-header {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 13px;
+
+      .employee-title {
+        display: flex;
+        align-items: center;
+        // width: 30%;
+
+        h1 {
+          margin: 10px;
+        }
+
+        .emp-count-badge {
+          margin-bottom: 7px;
+          background-color: #dbe4f0;
+        }
+      }
+
+      .searchbar-buttons-wrapper {
+        display: flex;
+        height: 100%;
+        width: 70%;
+        justify-content: end;
+        align-items: center;
+
+        .bg-color-blue {
+          color: white;
+          background-color: #328df6;
+        }
+
+        .search-bar {
+          align-self: center;
+          height: 70px;
+        }
+
+        .mat-input-element {
+          height: 40px;
+        }
+
+        .btn-color {
+          color: #e8e9ee;
+          background-color: #328df6;
+
+          mat-icon {
+            width: 25px;
+          }
+        }
+      }
+    }
+
+    .employee-details-table {
+      overflow-x: scroll;
+
+      .emp-image {
+        img {
+          width: 28px;
+          height: 28px;
+          border-radius: 200px;
+        }
+      }
+
+      .skills-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 2px 8px;
+        gap: 8px;
+
+        width: 97px;
+        height: 24px;
+
+        /* SystemColors/Purple/100 */
+
+        background: #eedef1;
+        border-radius: 4px;
+      }
+    }
+
+    .employee-cards-wrapper {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .employee-card {
+        width: 250px;
+        height: 270px;
+        padding: 10px;
+        margin: 20px;
+        border: 1px solid #e8e9ee;
+
+        .card-header-wrapper {
+          width: 100%;
+          height: 75%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-bottom: 1px solid #e8e9ee;
+
+          img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+          }
+
+          .employee-type {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 2px 8px;
+            gap: 8px;
+
+            width: 57px;
+            height: 24px;
+
+            background: #eedef1;
+            border-radius: 4px;
+          }
+        }
+
+        .card-content-wrapper {
+          height: 25%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+
+          .employee-contact-detail {
+            display: flex;
+            color: #328df6;
+            justify-content: center;
+
+            mat-icon {
+              margin-right: 15px;
+            }
+
+            a {
+              color: #328df6;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-.icon-class{
-    font-size: 30px;
-    width: 30px;
-    height: 30px;
-    color: #328DF6;
+@media screen and (max-width: 992px) {
+  .employee-management-wrapper {
+    // width: 40rem;
+
+    .all-cards {
+      flex-wrap: wrap;
+
+      .single-card {
+        width: 100%;
+        margin: 10px;
+      }
+    }
+
+    .employee-details-wrapper {
+      width: 100%;
+    }
+  }
 }
 
-.background-white {
-    background-color: white;
-}
+@media screen and (max-width: 768px) {
+  .employee-details-header {
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 3px;
 
-mat-card-title{
-    color: #328DF6;
-    font-weight: bold;
-}
+    .searchbar-buttons-wrapper {
+      flex-direction: column;
 
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
-
-.example-full-width {
-    width: 100%;
+      button {
+        width: 10px;
+      }
+    }
+  }
 }

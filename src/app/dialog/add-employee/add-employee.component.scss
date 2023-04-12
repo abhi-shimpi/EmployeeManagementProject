@@ -1,8 +1,7 @@
-.add-employee-wrap {
+.add-employee-wrapper {
   width: 100%;
   height: 100%;
   background-color: white;
-  //   border: 1px solid red;
   overflow: auto;
 
   /* Header */
@@ -25,99 +24,102 @@
   .add-employee-form {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     border: 2px solid #e8e9ee;
 
-    .content {
+    .content-wrapper {
+      display: flex;
       width: 100%;
       height: 100%;
-    }
 
-    /* Aside Content */
-    .aside-content-wrap {
-      width: 30%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      /* Aside Content */
+      .basic-info-wrap {
+        width: 30%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      .profile-and-emp-info-wrapper {
-        width: 80%;
-        height: 90%;
-        padding: 10px;
-        border: 2px solid #e8e9ee;
+        .profile-and-emp-info-wrapper {
+          width: 80%;
+          height: 90%;
+          padding: 10px;
+          border: 2px solid #e8e9ee;
 
-        .profile-photo {
-          height: 40%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-
-          .file-input {
-            display: none;
-          }
-
-          img {
-            width: 130px;
-            height: 160px;
-          }
-        }
-
-        .input-full-width {
-          width: 100%;
-        }
-      }
-    }
-
-    /* Main content */
-    .main-content-wrap {
-      width: 70%;
-      height: 100%;
-
-      .personal-details-wrapper,
-      .contact-details-wrapper {
-        border: 2px solid #e8e9ee;
-        border-radius: 7px;
-        margin: 6px;
-      }
-
-      .personal-details-wrapper {
-        height: 430px;
-
-        .personal-details-form {
-          height: 80%;
-          width: 90%;
-          margin: auto;
-          overflow: auto;
-
-          .row {
+          .profile-photo {
+            height: 40%;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
-            mat-form-field {
-              width: 45%;
+            .file-input {
+              display: none;
+            }
+
+            img {
+              width: 130px;
+              height: 160px;
+            }
+          }
+
+          .input-full-width {
+            width: 100%;
+          }
+        }
+      }
+
+      /* Main content */
+      .main-content-wrap {
+        width: 70%;
+        height: 100%;
+
+        .personal-details-wrapper,
+        .contact-details-wrapper {
+          border: 2px solid #e8e9ee;
+          border-radius: 7px;
+          margin: 6px;
+        }
+
+        .personal-details-wrapper {
+          height: 430px;
+
+          .personal-details-form {
+            height: 80%;
+            width: 90%;
+            margin: auto;
+            overflow: auto;
+
+            .input-row {
+              display: flex;
+              gap: 10px;
+
+              mat-form-field {
+                width: 45%;
+              }
             }
           }
         }
-      }
 
-      .contact-details-wrapper {
-        height: 240px;
-        overflow: auto;
-        //   border: 1px solid blue;
-
-        .contact-details-form {
-          height: 80%;
-          width: 90%;
+        .contact-details-wrapper {
+          height: 240px;
           overflow: auto;
-          margin: auto;
+          //   border: 1px solid blue;
 
-          .row {
-            display: flex;
-            gap: 10px;
+          .contact-details-form {
+            height: 80%;
+            width: 90%;
+            overflow: auto;
+            margin: auto;
 
-            mat-form-field {
-              width: 45%;
+            .input-row {
+              display: flex;
+              gap: 10px;
+
+              mat-form-field {
+                width: 45%;
+              }
             }
           }
         }
@@ -136,6 +138,7 @@
     }
   }
 }
+
 .add-employee-wrap::-webkit-scrollbar {
   display: none;
 }
@@ -150,4 +153,34 @@
 
 .personal-details-form::-webkit-scrollbar {
   display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .basic-info-wrap {
+    min-width: 100%;
+  }
+
+  .main-content-wrap {
+    min-width: 100%;
+    overflow: auto  ;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .main-content-wrap {
+    min-width: 100%;
+    overflow: auto;
+
+    .input-row {
+      flex-direction: column;
+
+      mat-form-field {
+        min-width: 90%;
+      }
+    }
+  }
 }

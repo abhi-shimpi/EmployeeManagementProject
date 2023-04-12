@@ -5,3 +5,23 @@
     background-color: rgba(255, 255, 255, 255);
     box-shadow: 1px 1px 3px 2px rgb(241, 241, 241);
 }
+
+@media (max-width: 992px) {
+  /* Styles for screens less than or equal to 768px wide */
+
+  #area-chart{
+    width: 650px;
+    height: 300px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Styles for screens less than or equal to 768px wide */
+
+  #area-chart{
+    width: 350px;
+    height: 250px;
+    margin: 5px;
+  }
+}

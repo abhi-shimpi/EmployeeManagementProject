@@ -1,7 +1,27 @@
-#gauge-chart{
-    width: 400px;
-        height: 500px;
-        margin: 5px;
-        background-color: rgba(255, 255, 255, 255);
-        box-shadow: 1px 1px 3px 2px rgb(241, 241, 241);
+#gauge-chart {
+  width: 400px;
+  height: 500px;
+  margin: 5px;
+  background-color: rgba(255, 255, 255, 255);
+  box-shadow: 1px 1px 3px 2px rgb(241, 241, 241);
+}
+
+@media (max-width: 968px) {
+  /* Styles for screens less than or equal to 768px wide */
+
+  #gauge-chart {
+    width: 350px;
+    height: 400px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Styles for screens less than or equal to 768px wide */
+
+  #gauge-chart {
+    width: 300px;
+    height: 380px;
+    margin: 5px;
+  }
 }

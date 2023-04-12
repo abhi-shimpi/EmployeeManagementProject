@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
 * {
   margin: 0;
   padding: 0;
@@ -50,6 +52,10 @@ body::-webkit-scrollbar{
 
 .example-container mat-form-field + mat-form-field {
   margin-left: 8px;
+}
+
+.mar-10{
+  margin: 5px;
 }
 
 

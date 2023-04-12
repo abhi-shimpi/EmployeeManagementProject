@@ -1,15 +1,159 @@
-<div class="all-cards">
-    <div *ngFor="let obj of cardDetailsArr" class="single-card">
-        <mat-card class="card background-white">
-                <mat-card-title-group class="background-white" >
+<div class="employee-management-wrapper">
+    <div class="all-cards">
+        <div *ngFor="let obj of cardDetailsArr" class="single-card">
+            <mat-card class="card background-white">
+                <mat-card-title-group class="background-white">
                     <mat-card-subtitle class="background-white">{{obj.cardSubtitle}}</mat-card-subtitle>
                     <mat-card-title class="background-white">{{obj.cardTitle}}</mat-card-title>
                     <div class="card-image">
-                        <mat-icon class="icon-class">{{obj.cardimage}}</mat-icon> 
+                        <mat-icon class="icon-class">{{obj.cardimage}}</mat-icon>
                     </div>
                 </mat-card-title-group>
-        </mat-card>
+            </mat-card>
+        </div>
+    </div>
+
+
+
+    <div class="employee-details-wrapper">
+        <div class="employee-details-header">
+            <div class="employee-title">
+                <h1>Employee</h1>
+                <button mat-flat-button class="emp-count-badge">100</button>
+            </div>
+            <div class="searchbar-buttons-wrapper">
+
+                <mat-form-field class="margin search-bar" appearance="outline">
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input matInput placeholder="Search" #input>
+                </mat-form-field>
+
+                <div>
+                    <button class="btn-color mar-10" mat-flat-button (click)="openUserDialog()">
+                        <mat-icon>add</mat-icon>
+                        <span>Add</span>
+                    </button>
+                    <button class="mar-10" [ngClass]="{'bg-color-blue':!visible}" mat-stroked-button (click)="changeToCards()">
+                        <mat-icon>assignment_ind</mat-icon>
+                    </button>
+                    <button class="mar-10" [ngClass]="{'bg-color-blue':visible}" mat-stroked-button (click)="changeToList()">
+                        <mat-icon>view_list</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div *ngIf="visible" class="employee-details-table">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="employeeImage">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                    <td mat-cell *matCellDef="let row">
+                        <div class="emp-image">
+                            <img src="{{row.employeeImage}}" alt="">
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fullName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row">
+                        {{row.fullName}}
+                    </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                    <td mat-cell *matCellDef="let row"> {{row.role}}</td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+                    <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+                </ng-container>
+
+                <!-- Fruit Column -->
+                <ng-container matColumnDef="phoneNumber">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
+                    <td mat-cell *matCellDef="let row"> {{row.phoneNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="skills">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Skills </th>
+                    <td mat-cell *matCellDef="let row">
+                        <!-- <div class="skills-wrapper" *ngFor="let item of row.skills">
+                            {{item}}
+                        </div> -->
+                        <div class="skills-wrapper">
+                            {{row.skills}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="onEditForm(row)">
+                                <mat-icon>mode_edit</mat-icon>
+                                <span>Edit form</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete form</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+<!-- <mat-row></mat-row> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+
+        <div *ngIf="!visible" class="employee-cards-wrapper">
+            <div class="employee-card" *ngFor="let card of cardData">
+                <div class="card-header-wrapper">
+                    <div>
+                        <img src={{card.profileImage}} alt="">
+                    </div>
+                    <div>
+                        <h2>{{card.employeeName}}</h2>
+                    </div>
+                    <div class="employee-type">
+                        <span> {{card.employeeType}} </span>
+                    </div>
+                </div>
+                <div class="card-content-wrapper">
+                    <div class="employee-contact-detail">
+                        <mat-icon>email</mat-icon>
+                        <a href="">{{card.employeeEmail}}</a>
+                    </div>
+                    <div class="employee-contact-detail">
+                        <mat-icon>wifi_calling_3</mat-icon>
+                        <span> {{card.employeeCall}} </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
-
-<a (click)="openUserDialog()">Open Confirm Dialog</a>
