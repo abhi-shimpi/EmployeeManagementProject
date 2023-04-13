@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,8 +37,10 @@ import { LineChartComponent } from './components/dashboard/line-chart/line-chart
 import { AreaChartComponent } from './components/dashboard/area-chart/area-chart.component';
 import { GaugeChartComponent } from './components/dashboard/gauge-chart/gauge-chart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
 import { AddEmployeeComponent } from './dialog/add-employee/add-employee.component';
+import { EmployeeServiceService } from './services/employee-service.service';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -81,8 +84,10 @@ import { AddEmployeeComponent } from './dialog/add-employee/add-employee.compone
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [EmployeeServiceService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

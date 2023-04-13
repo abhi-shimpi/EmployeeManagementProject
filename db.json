@@ -1,0 +1,91 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "employees": [
+    {
+      "generalDetails": {
+        "profilePhoto": {},
+        "departmentName": "Delivery",
+        "role": "Intern",
+        "joiningDate": "2023-04-11T18:30:00.000Z"
+      },
+      "personalDetails": {
+        "fullName": "Abhishek Rajendra ",
+        "dateOfBirth": "2023-04-10T18:30:00.000Z",
+        "langauge": "English",
+        "skills": [
+          {
+            "item_id": 2,
+            "item_text": "Coding"
+          },
+          {
+            "item_id": 4,
+            "item_text": "Sales"
+          }
+        ],
+        "role": "Intern",
+        "gender": "Male",
+        "maritalStatus": "NM",
+        "bloodGroup": "B+",
+        "type": "Delivery"
+      },
+      "contactDetails": {
+        "email": "abhishekshimpi100@gmail.com",
+        "phoneNumber": 7709155477,
+        "currentCity": "Aurangabad",
+        "homeTown": "Aurangabad",
+        "currentAddress": "GOvt college of Engg. Aurangabad hostel A,  Osmanpura. Aurangabad",
+        "residentialAdress": "pune"
+      },
+      "id": 1
+    },
+    {
+      "generalDetails": {
+        "profilePhoto": "",
+        "departmentName": "Delivery",
+        "role": "Intern",
+        "joiningDate": "2023-04-11T18:30:00.000Z"
+      },
+      "personalDetails": {
+        "fullName": "Darshan Revengade",
+        "dateOfBirth": "2023-04-11T18:30:00.000Z",
+        "langauge": "Engilish",
+        "skills": [
+          {
+            "item_id": 2,
+            "item_text": "Coding"
+          }
+        ],
+        "role": "Intern",
+        "gender": "Male",
+        "maritalStatus": "NM",
+        "bloodGroup": "B+",
+        "type": "Delivery"
+      },
+      "contactDetails": {
+        "email": "abhishekshimpi100@gmail.com",
+        "phoneNumber": 7709155477,
+        "currentCity": "Aurangabad",
+        "homeTown": "Aurangabad",
+        "currentAddress": "GOvt college of Engg. Aurangabad hostel A,  Osmanpura. Aurangabad",
+        "residentialAdress": "pune"
+      },
+      "id": 2
+    }
+  ]
+}

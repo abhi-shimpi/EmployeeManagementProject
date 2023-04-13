@@ -1,18 +1,20 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { AddEmployeeComponent } from 'src/app/dialog/add-employee/add-employee.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'; // import { ViewEncapsulation } from '@angular/core';
+import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { Observable } from 'rxjs';
 
 export interface UserData {
-  employeeImage:string,
+  employeeImage: string;
   fullName: string;
   role: string;
   type: string;
   phoneNumber: string;
   email: string;
-  skills:string;
+  skills: Array<any>;
 }
 
 @Component({
@@ -21,7 +23,7 @@ export interface UserData {
   styleUrls: ['./employee-management.component.scss'],
   // encapsulation: ViewEncapsulation.None,
 })
-export class EmployeeManagementComponent {
+export class EmployeeManagementComponent implements OnInit {
   cardDetailsArr: Array<any> = [
     {
       cardSubtitle: 'All Employees',
@@ -103,53 +105,6 @@ export class EmployeeManagementComponent {
   ];
 
   //Fake User Data for table
-  users = [
-    {
-      employeeImage: '../../../assets/MyImage.jpeg',
-      fullName: 'Bbhishek',
-      role: 'Intern',
-      type: 'Intern',
-      phoneNumber: '7899093456',
-      email: 'abhi@gmail.com',
-      skills: 'Angular',
-    },
-    {
-      employeeImage: '../../../assets/MyImage.jpeg',
-      fullName: 'Abhishek',
-      role: 'Intern',
-      type: 'Intern',
-      phoneNumber: '7899093456',
-      email: 'abhi@gmail.com',
-      skills: 'Angular',
-    },
-    {
-      employeeImage: '../../../assets/MyImage.jpeg',
-      fullName: 'Abhishek',
-      role: 'Intern',
-      type: 'Intern',
-      phoneNumber: '7899093456',
-      email: 'abhi@gmail.com',
-      skills: 'Angular',
-    },
-    {
-      employeeImage: '../../../assets/MyImage.jpeg',
-      fullName: 'Abhishek',
-      role: 'Intern',
-      type: 'Intern',
-      phoneNumber: '7899093456',
-      email: 'abhi@gmail.com',
-      skills: 'Angular',
-    },
-    {
-      employeeImage: '../../../assets/MyImage.jpeg',
-      fullName: 'Abhishek',
-      role: 'Intern',
-      type: 'Intern',
-      phoneNumber: '7899093456',
-      email: 'abhi@gmail.com',
-      skills: 'Angular',
-    },
-  ];
 
   displayedColumns: any[] = [
     'employeeImage',
@@ -167,23 +122,20 @@ export class EmployeeManagementComponent {
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(this.users);
+  constructor(
+    public dialog: MatDialog,
+    private empService: EmployeeServiceService
+  ) {}
+
+  ngOnInit(): void {
+    this.getAllEmployeeList();
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator!;
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   openUserDialog() {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
       width: '80%',
@@ -191,9 +143,12 @@ export class EmployeeManagementComponent {
       position: { right: '10px', top: '0px' },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-      }
+    dialogRef.afterClosed().subscribe({
+      next: (val: any) => {
+        if (val) {
+          this.dataSource = new MatTableDataSource(this.empService.employees);
+        }
+      },
     });
   }
 
@@ -206,12 +161,89 @@ export class EmployeeManagementComponent {
   }
 
   //Edit form button
-  onEditForm(data: any) {
-    const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      width: '80%',
-      height: '100%',
-      position: { right: '10px', top: '0px' },
-      data,
+  onEditForm(data: any, id: number) {
+    console.log('Edit id', id);
+    let empArray;
+    this.empService.getEmployeesList().subscribe({
+      next: (data: any) => {
+        empArray = data.find((item: any) => {
+          return item.id === id;
+        });
+        console.log('EmpArray in edit', empArray);
+        const dialogRef = this.dialog.open(AddEmployeeComponent, {
+          width: '80%',
+          height: '100%',
+          position: { right: '10px', top: '0px' },
+          data: empArray,
+        });
+
+        dialogRef.afterClosed().subscribe({
+          next: (val: any) => {
+            if (val) {
+              this.empService.employees = [];
+              this.getAllEmployeeList()
+            }
+          },
+          error: (err: any) => {
+            console.log(err);
+          },
+        });
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
     });
   }
+
+  //Get data for table
+  getAllEmployeeList() {
+    this.empService.getEmployeesList().subscribe({
+      next: (data: any) => {
+        this.empService.getDataFromArray(data);
+        this.dataSource = new MatTableDataSource(this.empService.employees);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+        console.log('Employee', this.empService.employees);
+        console.log('DataSource', this.dataSource.data.length);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
+
+  deleteEmployee(id: number) {
+    console.log('Id', id);
+    this.empService.deleteEmployee(id).subscribe({
+      next: () => {
+        this.empService.deleteFromArray(id);
+        alert('Employee deleted successfully');
+        console.log('Employee deletion , index', this.empService.employees);
+        this.dataSource = new MatTableDataSource(this.empService.employees);
+      },
+      error: (err: any) => {
+        console.log('Error', err);
+      },
+    });
+  }
+
+  applyFilter(event: Event) {
+    console.log(this.dataSource);
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
+
+// 'employeeImage',
+//     'fullName',
+//     'role',
+//     'type',
+//     'phoneNumber',
+//     'email',
+//     'skills',
+//     'action',

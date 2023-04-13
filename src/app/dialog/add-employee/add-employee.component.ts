@@ -1,8 +1,12 @@
-
-import { Component, Inject,OnInit } from '@angular/core';
+import {  Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -12,30 +16,27 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
 
+  selectedFile: any;
   urlLink: string = 'assets/profile-pic.png';
   role: Array<any> = ['Inter', 'sw', 'ssw'];
   gender: Array<any> = ['male', 'female'];
   bloodGroupArray: Array<any> = ['A+', 'B+'];
 
   //For Multiple skills selection
-  skillsArray = [
-    { id: 1, name: 'Communication' },
-    { id: 2, name: 'Coding' },
-    { id: 4, name: 'Public Speaking' },
-    { id: 5, name: 'Marketing' },
-  ];
-  selectedSkillIds = [];
+  dropdownList: any;
+  dropdownSettings: any;
 
   fileName = '';
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddEmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private empService: EmployeeServiceService,
   ) {
     this.employeeForm = this.fb.group({
       generalDetails: this.fb.group({
-        profilePhoto: '',
+        profilePhoto: [null],
         departmentName: '',
         role: '',
         joiningDate: '',
@@ -44,7 +45,7 @@ export class AddEmployeeComponent implements OnInit {
         fullName: '',
         dateOfBirth: '',
         langauge: '',
-        skills: this.fb.array([this.selectedSkillIds]),
+        skills: ['', [Validators.required]],
         role: '',
         gender: '',
         maritalStatus: '',
@@ -63,22 +64,83 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log('Edit Data in ngOnInit', this.data);
     this.employeeForm.patchValue(this.data);
+
+    this.dropdownList = this.getData();
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+    };
   }
+
+  onItemSelect($event: any) {
+    console.log('$event is ', $event);
+  }
+  getData(): Array<any> {
+    return [
+      { item_id: 1, item_text: 'Communication Skills' },
+      { item_id: 2, item_text: 'Coding' },
+      { item_id: 3, item_text: 'Designing' },
+      { item_id: 4, item_text: 'Sales' },
+      { item_id: 5, item_text: 'Marketing' },
+    ];
+  }
+
+  //Upload Image
   updateProfileImage(event: any) {
-    if (event.target.files) {
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        this.urlLink = event.target.result;
+    
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.urlLink = reader.result as string;
+        this.employeeForm.get('generalDetails.profilePhoto')?.setValue(this.urlLink);
       };
+      reader.readAsDataURL(this.selectedFile);
+    } else {
+      this.employeeForm.get('generalDetails.profilePhoto')?.setValue(null);
+      this.urlLink = '';
     }
   }
 
+  
+
   //Code for adding employee
   onFormSubmit() {
-    console.log(this.employeeForm.value);
+    if (this.data) {
+      console.log(this.data.id);
+      this.empService
+        .updateEmployee(this.data.id, this.employeeForm.value)
+        .subscribe({
+          next: (data: any) => {
+            console.log('data in Update', data);
+            alert('Employee details updated!');
+            this.dialogRef.close(true);
+          },
+          error: (err: any) => {
+            console.log(err);
+          },
+        });
+      console.log(this.employeeForm.value);
+    } else {
+      const formData = new FormData();
+      formData.append('profilePhoto',this.selectedFile);
+      console.log(formData.get('profilePhoto'));
+     
+      this.empService.addDataInArray(this.employeeForm.value);
+      this.empService.addEmployee(this.employeeForm.value).subscribe({
+        next: () => {
+          alert('Employee added successfully');
+          this.dialogRef.close(true);
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+    }
   }
 }
-

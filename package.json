@@ -25,6 +25,8 @@
     "@ng-select/ng-select": "^10.0.4",
     "chart.js": "^4.2.1",
     "echarts": "^5.4.2",
+    "json-server": "^0.17.3",
+    "ng-multiselect-dropdown": "^0.3.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

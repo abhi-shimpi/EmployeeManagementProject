@@ -67,9 +67,17 @@
                                             formControlName="langauge">
                                     </mat-form-field>
 
-                                    <ng-select formControlName="skills" [items]="skillsArray" bindLabel="name" bindValue="id" [multiple]="true"
+                                    <!-- <ng-select formControlName="skills" [items]="skillsArray" bindLabel="name" bindValue="id" [multiple]="true"
                                         placeholder="Select cities" [(ngModel)]="selectedSkillIds">
-                                    </ng-select>
+                                    </ng-select> -->
+
+                                    <ng-multiselect-dropdown 
+                                        formControlName="skills" 
+                                        [placeholder]="'Select Skills'"
+                                        [settings]="dropdownSettings" 
+                                        [data]="dropdownList">
+                                        (onSelect)="onItemSelect($event)"
+                                    </ng-multiselect-dropdown>
 
 
                                 </div>
@@ -98,7 +106,7 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>Marital Status</mat-label>
                                         <input formControlName="maritalStatus" matInput type="text"
-                                            placeholder="Ex. Technical" formControlName="fullName">
+                                            placeholder="Ex. Technical" formControlName="maritalStatus">
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Blood Group</mat-label>
@@ -176,8 +184,8 @@
         </div>
         <div class="footer">
             <div fxLayout="row" class="form-button-row">
-                <button mat-raised-button>Cancel</button>
-                <button mat-raised-button color="primary" type="submit">Add</button>
+                <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+                <button mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Add'}}</button>
             </div>
         </div>
     </form>
