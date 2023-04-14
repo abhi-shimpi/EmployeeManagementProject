@@ -7,14 +7,16 @@
             <div class="basic-info-wrap">
                 <div class="profile-and-emp-info-wrapper" formGroupName="generalDetails">
                     <div class="profile-photo">
-                        <img [src]="urlLink" alt="Profile image">
+                        <div class="employee-image">
+                            <img [src]="urlLink" alt="Profile image">
+                        </div>
                         <!-- <input type="file" (click)="updateProfileImage($event)"> -->
-                        <input formControlName="profilePhoto" type="file" class="file-input"
-                            (change)="updateProfileImage($event)" #fileUpload>
+                        <!-- <input  type="file" class="file-input"
+                            (change)="updateProfileImage($event)" #fileUpload> -->
+                        <input type="file" id="file" hidden (change)="inputFile($event)" #fileUpload>
 
                         <div class="file-upload">
-                            <button mat-mini-fab color="primary" type="button" class="upload-btn"
-                                (click)="fileUpload.click()">
+                            <button type="button" mat-fab color="primary" (click)="fileUpload.click()">
                                 <mat-icon>attach_file</mat-icon>
                             </button>
                         </div>
@@ -27,7 +29,7 @@
                             </mat-form-field>
                             <mat-form-field class="input-full-width">
                                 <mat-label>Role</mat-label>
-                                <input matInput placeholder="" value="-" formControlName="role">
+                                <input matInput placeholder="" value="-" formControlName="roleName">
                             </mat-form-field>
                             <mat-form-field class="input-full-width" appearance="fill">
                                 <mat-label>Joing Date</mat-label>
@@ -55,8 +57,9 @@
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Date of Birth</mat-label>
-                                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose date of birth"
+                                            formControlName="dateOfBirth">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
                                 </div>
@@ -67,17 +70,17 @@
                                             formControlName="langauge">
                                     </mat-form-field>
 
-                                    <!-- <ng-select formControlName="skills" [items]="skillsArray" bindLabel="name" bindValue="id" [multiple]="true"
-                                        placeholder="Select cities" [(ngModel)]="selectedSkillIds">
-                                    </ng-select> -->
-
-                                    <ng-multiselect-dropdown 
-                                        formControlName="skills" 
-                                        [placeholder]="'Select Skills'"
-                                        [settings]="dropdownSettings" 
-                                        [data]="dropdownList">
-                                        (onSelect)="onItemSelect($event)"
-                                    </ng-multiselect-dropdown>
+                                    <div class="dropdown-container">
+                                        <ng-multiselect-dropdown class="multiselect-option" formControlName="skills"
+                                            [placeholder]="'Select Skills'" [settings]="dropdownSettings"
+                                            [data]="dropdownList">
+                                            (onSelect)="onItemSelect($event)"
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <p *ngIf="!employeeForm.get('personalDetails.skills')?.valid && employeeForm.get('personalDetails.skills')?.touched"
+                                        class="warning">
+                                        This is required
+                                    </p>
 
 
                                 </div>
@@ -87,9 +90,10 @@
                                         <mat-label>Role</mat-label>
                                         <mat-select formControlName="role">
                                             <mat-option value="Intern">Intern</mat-option>
-                                            <mat-option value="Ass. Software">Ass. Software</mat-option>
-                                            <mat-option value="Software">Software</mat-option>
-                                            <mat-option value="Snr.Software">Snr.Software</mat-option>
+                                            <mat-option value="Associate Software Engineer">Associate Software Engineer</mat-option>
+                                            <mat-option value="Software Engineer">Software Engineer</mat-option>
+                                            <mat-option value="Snr.Software Engineer">Snr.Software Engineer</mat-option>
+                                            <mat-option value="UI/UX Designer">UI/UX Designer</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
@@ -123,8 +127,8 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>Type</mat-label>
                                         <mat-select formControlName="type">
-                                            <mat-option value="Delivery">Intern</mat-option>
-                                            <mat-option value="Design">Permanent</mat-option>
+                                            <mat-option value="Intern">Intern</mat-option>
+                                            <mat-option value="Permanent">Permanent</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -140,12 +144,19 @@
                                         <mat-label>Email</mat-label>
                                         <input matInput type="email" placeholder="Ex. test@gmail.com"
                                             formControlName="email">
+                                        <mat-hint
+                                            *ngIf="!employeeForm.get('contactDetails.email')?.valid && employeeForm.get('contactDetails.email')?.touched"
+                                            class="warning">Please enter valid email</mat-hint>
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Phone Number</mat-label>
                                         <input matInput placeholder="Ex. 9078462389" type="number"
                                             formControlName="phoneNumber">
+                                        <mat-hint
+                                            *ngIf="!employeeForm.get('contactDetails.phoneNumber')?.valid && employeeForm.get('contactDetails.phoneNumber')?.touched"
+                                            class="warning">Please enter Valid contact number</mat-hint>
                                     </mat-form-field>
+
                                 </div>
 
                                 <div class="input-row">
@@ -177,15 +188,17 @@
                             </div>
                         </div>
                     </mat-tab>
-                    <mat-tab label="Second">Content 2</mat-tab>
-                    <mat-tab label="Third">Content 3</mat-tab>
+                    <mat-tab label="Education & Work Experience">Education & Work Experience</mat-tab>
+                    <mat-tab label="Documents">Documents</mat-tab>
                 </mat-tab-group>
             </div>
         </div>
         <div class="footer">
             <div fxLayout="row" class="form-button-row">
                 <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-                <button mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Add'}}</button>
+                <button class="bg-color-blue "
+                    [disabled]="!(employeeForm.get('personalDetails')?.valid && employeeForm.get('contactDetails')?.valid)"
+                    mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Add'}}</button>
             </div>
         </div>
     </form>

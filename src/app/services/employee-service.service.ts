@@ -29,11 +29,11 @@ export class EmployeeServiceService {
     let temp;
     temp = {
       id: item.id,
-      employeeImage: item.generalDetails.employeeImage,
+      employeeImage: item.generalDetails.profilePhoto,
       fullName: item.personalDetails.fullName,
       role: item.personalDetails.role,
       type: item.personalDetails.type,
-      phoneNumber: item.contactDetails.phoneNumber,
+      phoneNumber:"+91 " + item.contactDetails.phoneNumber,
       email: item.contactDetails.email,
       skills: item.personalDetails.skills,
     };
@@ -45,11 +45,11 @@ export class EmployeeServiceService {
     data.map((item: any) => {
       temp = {
         id: item.id,
-        employeeImage: item.generalDetails.employeeImage,
+        employeeImage: item.generalDetails.profilePhoto,
         fullName: item.personalDetails.fullName,
         role: item.personalDetails.role,
         type: item.personalDetails.type,
-        phoneNumber: item.contactDetails.phoneNumber,
+        phoneNumber: '+91 ' + item.contactDetails.phoneNumber,
         email: item.contactDetails.email,
         skills: item.personalDetails.skills,
       };
@@ -62,5 +62,4 @@ export class EmployeeServiceService {
       return item.id != id;
     });
   }
-
 }

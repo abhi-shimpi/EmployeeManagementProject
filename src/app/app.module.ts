@@ -21,7 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator'
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator'
 import {MatSortModule} from '@angular/material/sort'
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -41,6 +41,8 @@ import { AddEmployeeComponent } from './dialog/add-employee/add-employee.compone
 import { EmployeeServiceService } from './services/employee-service.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import { PaginatorDirective } from './components/employee-management/paginator.directive';
 
 
 @NgModule({
@@ -57,6 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
     GaugeChartComponent,
     DashboardComponent,
     AddEmployeeComponent,
+    PaginatorDirective,
   ],
   imports: [
     BrowserModule,
@@ -84,8 +87,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
+    MomentDateModule,
     NgMultiSelectDropDownModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [EmployeeServiceService],
   bootstrap: [AppComponent],

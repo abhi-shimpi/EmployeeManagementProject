@@ -1,25 +1,31 @@
 .sidebar {
-    height: 100%;
-    border-right: 1px solid #E8E9EE;
-    background-color: rgba(255, 255, 255, 255);
+  height: 100%;
+  border-right: 1px solid #e8e9ee;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 255);
 }
 
 .sidebar-logos {
-    width: 100%;
-    height: 64px;
+  cursor: pointer;
+  border-radius: 6px;
+
+  img,
+  mat-icon {
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 255);
+    padding: 10px;
+  }
 }
 
 i {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 @media (max-width: 668px) {
-     .sidebar{
-        width: 40px;
-     }  
+  .sidebar {
+    width: 40px;
+  }
 }

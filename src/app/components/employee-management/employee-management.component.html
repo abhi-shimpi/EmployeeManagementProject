@@ -3,10 +3,10 @@
         <div *ngFor="let obj of cardDetailsArr" class="single-card">
             <mat-card class="card background-white">
                 <mat-card-title-group class="background-white">
-                    <mat-card-subtitle class="background-white">{{obj.cardSubtitle}}</mat-card-subtitle>
-                    <mat-card-title class="background-white">{{obj.cardTitle}}</mat-card-title>
+                    <mat-card-subtitle font-family="Poppins" class="background-white card-subtitle">{{obj.cardSubtitle}}</mat-card-subtitle>
+                    <mat-card-title font-family="Poppins" class="background-white emp-count">{{obj.cardTitle}}</mat-card-title>
                     <div class="card-image">
-                        <mat-icon class="icon-class">{{obj.cardimage}}</mat-icon>
+                        <img src="{{obj.cardimage}}" alt="">
                     </div>
                 </mat-card-title-group>
             </mat-card>
@@ -18,25 +18,25 @@
     <div class="employee-details-wrapper">
         <div class="employee-details-header">
             <div class="employee-title">
-                <h1>Employee</h1>
-                <button mat-flat-button class="emp-count-badge">100</button>
+                <h1>Employees</h1>
+                <span class="emp-count">{{length}}</span>
             </div>
             <div class="searchbar-buttons-wrapper">
 
-                <mat-form-field class="margin search-bar" appearance="outline">
-                    <mat-icon matPrefix>search</mat-icon>
-                    <input matInput matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
-                </mat-form-field>
+                <div class="margin search-bar" appearance="outline">
+                    <mat-icon class="search-icon">search</mat-icon>
+                    <input matInput class="search-input" (keyup)="applyFilter($event)" placeholder="Search" #input>
+                </div>
 
-                <div>
-                    <button class="btn-color mar-10" mat-flat-button (click)="openUserDialog()">
+                <div class="btn-wrapper" fxLayout>
+                    <button class="add-user-btn mar-10 custom-btn" (click)="openUserDialog()">
                         <mat-icon>add</mat-icon>
                         <span>Add</span>
                     </button>
-                    <button class="mar-10" [ngClass]="{'bg-color-blue':!visible}" mat-stroked-button (click)="changeToCards()">
+                    <button class="mar-10 custom-btn" [ngClass]="{'bg-color-blue':!visible}" (click)="changeToCards()">
                         <mat-icon>assignment_ind</mat-icon>
                     </button>
-                    <button class="mar-10" [ngClass]="{'bg-color-blue':visible}" mat-stroked-button (click)="changeToList()">
+                    <button class="mar-10 custom-btn" [ngClass]="{'bg-color-blue':visible}" (click)="changeToList()">
                         <mat-icon>view_list</mat-icon>
                     </button>
                 </div>
@@ -46,67 +46,52 @@
         <div *ngIf="visible" class="employee-details-table">
             <table mat-table [dataSource]="dataSource" matSort>
 
-                <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sr.No </th>
-                    <td mat-cell *matCellDef="let row">
-                        {{row.id}}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="employeeImage">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                    <td mat-cell *matCellDef="let row">
+                <ng-container  matColumnDef="fullName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name </th>
+                    <td mat-cell *matCellDef="let row" fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
                         <div class="emp-image">
-                            <img src="{{row.employeeImage}}" alt="">
+                            <img src="../../../assets/MyImage.jpeg" alt="">
                         </div>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="fullName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row">
-                        {{row.fullName}}
+                        <div class="emp-name-wrap">{{row.fullName}}</div>
                     </td>
                 </ng-container>
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.role}}</td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type </th>
+                    <td mat-cell *matCellDef="let row"> {{row.type}}</td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="role">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-                    <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Role </th>
+                    <td mat-cell *matCellDef="let row"> {{row.role}} </td>
                 </ng-container>
 
                 <!-- Fruit Column -->
                 <ng-container matColumnDef="phoneNumber">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile Number</th>
                     <td mat-cell *matCellDef="let row"> {{row.phoneNumber}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email </th>
                     <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="skills">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Skills </th>
-                    <td mat-cell *matCellDef="let row" fxLayout fxLayoutAlign="center center" fxLayoutGap="5px">
-                        <!-- <div class="skills-wrapper" *ngFor="let item of row.skills">
-                            {{item}}
-                        </div> -->
-                        <div  class="skills-wrapper" *ngFor="let item of row.skills">
-                            {{item.item_text}}
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Skills </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div fxLayout>
+                            <div *ngFor="let item of row.skills" class="skills-wrapper">{{item.itemText}}</div>
                         </div>
                     </td>
+
+
                 </ng-container>
 
                 <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
                     <td mat-cell *matCellDef="let row">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                             <mat-icon>more_vert</mat-icon>
@@ -123,7 +108,7 @@
                         </mat-menu>
                     </td>
                 </ng-container>
-<!-- <mat-row></mat-row> -->
+                <!-- <mat-row></mat-row> -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -133,7 +118,9 @@
                 </tr>
             </table>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            <mat-paginator appPaginator showFirstLastButtons [showTotalPages]="3" [length]="length"
+                [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 20]">>
+            </mat-paginator>
         </div>
 
         <div *ngIf="!visible" class="employee-cards-wrapper">

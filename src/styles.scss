@@ -1,24 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Poppins', sans-serif !important;
+  .material-icons {
+    font-family: 'Material Icons' !important;
+  }
 }
 
-/* body{
-    overflow-x: hidden;
-} */
 html,
 body {
   margin: 0;
   height: 100%;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #f5f5f5;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
 
@@ -54,8 +55,48 @@ body::-webkit-scrollbar{
   margin-left: 8px;
 }
 
-.mar-10{
+.mar-10 {
   margin: 5px;
 }
 
+.warning {
+  color: red;
+}
 
+.success {
+  border: 1px solid green;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.custom-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid #8490a2;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.bg-color-blue {
+  color: #ffffff;
+  background-color: #328df6;
+  border: none;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.color-blue {
+  color: #328df6;
+}
+
+.bg-transperent{
+  background-color: transparent;
+}

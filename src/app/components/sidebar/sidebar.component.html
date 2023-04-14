@@ -1,11 +1,11 @@
 <div class="sidebar">
-    <div class="sidebar-logos">
-        <mat-icon>home</mat-icon>
+    <div class="sidebar-logos" (click)="displayHome()">
+        <img src="../../../assets/logo.svg" alt="Comapany logo">
     </div>
-    <div class="sidebar-logos">
-        <mat-icon (click)="displayCharts()">leaderboard</mat-icon>
+    <div class="sidebar-logos" (click)="displayCharts()" [ngClass]="{'bg-color-blue':activatedButton}">
+        <mat-icon>leaderboard</mat-icon>
     </div>
-    <div class="sidebar-logos">
-        <mat-icon (click)="displayEmplyeeSystem()">supervisor_account</mat-icon>
+    <div class="sidebar-logos" (click)="displayEmplyeeSystem()" [ngClass]="{'bg-color-blue':!activatedButton}">
+        <mat-icon>assignment_ind</mat-icon>
     </div>
 </div>

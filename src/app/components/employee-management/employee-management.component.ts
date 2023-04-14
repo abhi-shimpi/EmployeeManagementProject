@@ -6,9 +6,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'; // import { ViewEncapsulation } from '@angular/core';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 import { Observable } from 'rxjs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { number } from 'echarts';
 
 export interface UserData {
-  employeeImage: string;
   fullName: string;
   role: string;
   type: string;
@@ -28,17 +29,17 @@ export class EmployeeManagementComponent implements OnInit {
     {
       cardSubtitle: 'All Employees',
       cardTitle: '100',
-      cardimage: 'perm_identity',
+      cardimage: '../../../assets/card1.svg',
     },
     {
-      cardSubtitle: 'Permanent Employees',
+      cardSubtitle: 'Permanent',
       cardTitle: '100',
-      cardimage: 'work_outline',
+      cardimage: '../../../assets/card2.svg',
     },
     {
       cardSubtitle: 'Interns',
       cardTitle: '100',
-      cardimage: 'assignment_ind',
+      cardimage: '../../../assets/card3.svg',
     },
   ];
 
@@ -107,7 +108,6 @@ export class EmployeeManagementComponent implements OnInit {
   //Fake User Data for table
 
   displayedColumns: any[] = [
-    'employeeImage',
     'fullName',
     'role',
     'type',
@@ -117,6 +117,7 @@ export class EmployeeManagementComponent implements OnInit {
     'action',
   ];
   dataSource!: MatTableDataSource<UserData>;
+  length!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -129,11 +130,6 @@ export class EmployeeManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEmployeeList();
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   openUserDialog() {
@@ -181,7 +177,7 @@ export class EmployeeManagementComponent implements OnInit {
           next: (val: any) => {
             if (val) {
               this.empService.employees = [];
-              this.getAllEmployeeList()
+              this.getAllEmployeeList();
             }
           },
           error: (err: any) => {
@@ -203,9 +199,7 @@ export class EmployeeManagementComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.empService.employees);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-
-        console.log('Employee', this.empService.employees);
-        console.log('DataSource', this.dataSource.data.length);
+        this.length = this.dataSource.data.length;
       },
       error: (err: any) => {
         console.log(err);
@@ -221,6 +215,9 @@ export class EmployeeManagementComponent implements OnInit {
         alert('Employee deleted successfully');
         console.log('Employee deletion , index', this.empService.employees);
         this.dataSource = new MatTableDataSource(this.empService.employees);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.length = this.dataSource.data.length;
       },
       error: (err: any) => {
         console.log('Error', err);
