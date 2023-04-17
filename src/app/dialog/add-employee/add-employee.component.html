@@ -1,6 +1,7 @@
 <div fxLayout="column" class="add-employee-wrapper">
-    <div class="header ">
+    <div class="header " fxLayout fxLayoutAlign="space-between">
         <h1 class="all-headers">Add New Employee</h1>
+        <button type="button" class="close-form-btn" [mat-dialog-close]="false">X</button>
     </div>
     <form [formGroup]="employeeForm" class="add-employee-form" (ngSubmit)="onFormSubmit()">
         <div class="content-wrapper">
@@ -10,12 +11,14 @@
                         <div class="employee-image">
                             <img [src]="urlLink" alt="Profile image">
                         </div>
-                        <!-- <input type="file" (click)="updateProfileImage($event)"> -->
-                        <!-- <input  type="file" class="file-input"
-                            (change)="updateProfileImage($event)" #fileUpload> -->
                         <input type="file" id="file" hidden (change)="inputFile($event)" #fileUpload>
 
-                        <div class="file-upload">
+                        <div *ngIf="showFullName" fxLayout="column" fxLayoutAlign="center center">
+                            <h3>{{employeeForm.get('personalDetails.fullName')?.value}}</h3>
+                            <h5>{{employeeForm.get('personalDetails.role')?.value}}</h5>
+                        </div>
+
+                        <div *ngIf="!showFullName" class="file-upload">
                             <button type="button" mat-fab color="primary" (click)="fileUpload.click()">
                                 <mat-icon>attach_file</mat-icon>
                             </button>
@@ -45,8 +48,9 @@
                 <mat-tab-group animationDuration="0ms">
                     <mat-tab label="Personal & Contact Details" class="all-tabs-wrapper">
                         <div class="personal-details-wrapper" formGroupName="personalDetails">
-                            <div class="personal-details-header">
+                            <div class="personal-details-header" fxLayout fxLayoutAlign="space-between">
                                 <h2 class="all-headers">Personal Details</h2>
+                                <mat-icon class="edit-form-icon" (click)="onEditPersonalForm()">edit</mat-icon>
                             </div>
                             <div class="personal-details-form">
                                 <div class="input-row">
@@ -71,7 +75,7 @@
                                     </mat-form-field>
 
                                     <div class="dropdown-container">
-                                        <ng-multiselect-dropdown class="multiselect-option" formControlName="skills"
+                                        <ng-multiselect-dropdown [disabled]="isDropdownVisible" class="multiselect-option" formControlName="skills"
                                             [placeholder]="'Select Skills'" [settings]="dropdownSettings"
                                             [data]="dropdownList">
                                             (onSelect)="onItemSelect($event)"
@@ -90,7 +94,8 @@
                                         <mat-label>Role</mat-label>
                                         <mat-select formControlName="role">
                                             <mat-option value="Intern">Intern</mat-option>
-                                            <mat-option value="Associate Software Engineer">Associate Software Engineer</mat-option>
+                                            <mat-option value="Associate Software Engineer">Associate Software
+                                                Engineer</mat-option>
                                             <mat-option value="Software Engineer">Software Engineer</mat-option>
                                             <mat-option value="Snr.Software Engineer">Snr.Software Engineer</mat-option>
                                             <mat-option value="UI/UX Designer">UI/UX Designer</mat-option>
@@ -135,8 +140,9 @@
                             </div>
                         </div>
                         <div class="contact-details-wrapper" formGroupName="contactDetails">
-                            <div class="main-content-header">
+                            <div class="main-content-header" fxLayout fxLayoutAlign="space-between">
                                 <h2 class="all-headers">Contact Details</h2>
+                                <mat-icon class="edit-form-icon" (click)="onEditContactForm()">edit</mat-icon>
                             </div>
                             <div class="contact-details-form">
                                 <div class="input-row">

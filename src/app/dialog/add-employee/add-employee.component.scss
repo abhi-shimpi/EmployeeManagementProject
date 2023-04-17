@@ -8,7 +8,14 @@
   .header {
     width: 100%;
     height: 7%;
-    // border: 1px solid green;
+
+    .close-form-btn {
+      padding: 15px;
+      background-color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
   }
 
   .all-headers {
@@ -91,6 +98,10 @@
         .personal-details-wrapper {
           height: 430px;
 
+          .edit-form-icon {
+            padding: 5px;
+          }
+
           .personal-details-form {
             height: 80%;
             width: 90%;
@@ -100,10 +111,13 @@
 
             .dropdown-container {
               width: 42%;
-        
+
               .multiselect-option {
-                width: 100%;
-                height: 100%;
+                .dropdown-btn {
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
+                }
               }
             }
 
@@ -197,6 +211,19 @@
 
       mat-form-field {
         min-width: 90%;
+      }
+    }
+
+    .dropdown-container {
+      width: 81% !important;
+      margin-bottom: 21px;
+
+      .multiselect-option {
+        .dropdown-btn {
+          height: 40px;
+          display: flex;
+          align-items: center;
+        }
       }
     }
   }

@@ -83,7 +83,7 @@ input.ng-invalid.ng-touched {
 }
 
 .bg-color-blue {
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: #328df6;
   border: none;
 }
@@ -91,6 +91,12 @@ input.ng-invalid.ng-touched {
 h2 {
   font-weight: 600;
   font-size: 16px;
+}
+
+h3{
+  font-weight: 500;
+  font-size: 14px;
+  margin: 2px !important;
 }
 
 .color-blue {

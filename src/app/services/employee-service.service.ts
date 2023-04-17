@@ -14,6 +14,7 @@ export class EmployeeServiceService {
   }
 
   getEmployeesList() {
+    this.employees = []
     return this.httpClient.get('http://localhost:3000/employees');
   }
 
@@ -29,7 +30,6 @@ export class EmployeeServiceService {
     let temp;
     temp = {
       id: item.id,
-      employeeImage: item.generalDetails.profilePhoto,
       fullName: item.personalDetails.fullName,
       role: item.personalDetails.role,
       type: item.personalDetails.type,
@@ -45,7 +45,6 @@ export class EmployeeServiceService {
     data.map((item: any) => {
       temp = {
         id: item.id,
-        employeeImage: item.generalDetails.profilePhoto,
         fullName: item.personalDetails.fullName,
         role: item.personalDetails.role,
         type: item.personalDetails.type,

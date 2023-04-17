@@ -11,7 +11,9 @@
 .sidebar-logos {
   cursor: pointer;
   border-radius: 6px;
-
+  text-decoration: none;
+  color: inherit;
+  
   img,
   mat-icon {
     display: flex;

@@ -25,6 +25,8 @@ export interface UserData {
   // encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeManagementComponent implements OnInit {
+  length!: number;
+
   cardDetailsArr: Array<any> = [
     {
       cardSubtitle: 'All Employees',
@@ -33,12 +35,12 @@ export class EmployeeManagementComponent implements OnInit {
     },
     {
       cardSubtitle: 'Permanent',
-      cardTitle: '100',
+      cardTitle: '70',
       cardimage: '../../../assets/card2.svg',
     },
     {
       cardSubtitle: 'Interns',
-      cardTitle: '100',
+      cardTitle: '30',
       cardimage: '../../../assets/card3.svg',
     },
   ];
@@ -47,55 +49,6 @@ export class EmployeeManagementComponent implements OnInit {
   visible: boolean = true;
   // For Cards
   cardData = [
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
-    {
-      profileImage: '../../../assets/profile-pic.png',
-      employeeName: 'Abhishek Shimpi',
-      employeeType: 'Intern',
-      employeeEmail: 'abhi@gmail.com',
-      employeeCall: '+91 7867345790',
-    },
     {
       profileImage: '../../../assets/profile-pic.png',
       employeeName: 'Abhishek Shimpi',
@@ -117,7 +70,6 @@ export class EmployeeManagementComponent implements OnInit {
     'action',
   ];
   dataSource!: MatTableDataSource<UserData>;
-  length!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -125,7 +77,7 @@ export class EmployeeManagementComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private empService: EmployeeServiceService
+    public empService: EmployeeServiceService
   ) {}
 
   ngOnInit(): void {
@@ -143,6 +95,7 @@ export class EmployeeManagementComponent implements OnInit {
       next: (val: any) => {
         if (val) {
           this.dataSource = new MatTableDataSource(this.empService.employees);
+          this.length = this.dataSource.data.length;
         }
       },
     });
@@ -159,25 +112,25 @@ export class EmployeeManagementComponent implements OnInit {
   //Edit form button
   onEditForm(data: any, id: number) {
     console.log('Edit id', id);
-    let empArray;
+    let employeeData;
     this.empService.getEmployeesList().subscribe({
       next: (data: any) => {
-        empArray = data.find((item: any) => {
+        employeeData = data.find((item: any) => {
           return item.id === id;
         });
-        console.log('EmpArray in edit', empArray);
+        console.log('EmpArray in edit', employeeData);
         const dialogRef = this.dialog.open(AddEmployeeComponent, {
           width: '80%',
           height: '100%',
           position: { right: '10px', top: '0px' },
-          data: empArray,
+          data: employeeData,
         });
 
         dialogRef.afterClosed().subscribe({
           next: (val: any) => {
             if (val) {
-              this.empService.employees = [];
               this.getAllEmployeeList();
+              this.length = this.dataSource.data.length;
             }
           },
           error: (err: any) => {
@@ -195,6 +148,7 @@ export class EmployeeManagementComponent implements OnInit {
   getAllEmployeeList() {
     this.empService.getEmployeesList().subscribe({
       next: (data: any) => {
+        console.log('Data got from edit component', data);
         this.empService.getDataFromArray(data);
         this.dataSource = new MatTableDataSource(this.empService.employees);
         this.dataSource.sort = this.sort;

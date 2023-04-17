@@ -1,11 +1,11 @@
 <div class="sidebar">
-    <div class="sidebar-logos" (click)="displayHome()">
+    <a class="sidebar-logos" [routerLink]="['/dashboard']" >
         <img src="../../../assets/logo.svg" alt="Comapany logo">
-    </div>
-    <div class="sidebar-logos" (click)="displayCharts()" [ngClass]="{'bg-color-blue':activatedButton}">
+    </a>
+    <a class="sidebar-logos" [routerLink]="['/dashboard']" routerLinkActive="bg-color-blue">
         <mat-icon>leaderboard</mat-icon>
-    </div>
-    <div class="sidebar-logos" (click)="displayEmplyeeSystem()" [ngClass]="{'bg-color-blue':!activatedButton}">
+    </a>
+    <a class="sidebar-logos" [routerLink]="['/employees']" routerLinkActive="bg-color-blue">
         <mat-icon>assignment_ind</mat-icon>
-    </div>
+    </a>
 </div>

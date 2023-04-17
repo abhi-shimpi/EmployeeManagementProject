@@ -1,10 +1,6 @@
-import { Component, Inject, OnInit ,ViewEncapsulation} from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
@@ -26,10 +22,12 @@ export const MY_DATE_FORMATS = {
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss'],
   providers: [{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
+  showFullName = false;
+  isDropdownVisible = true;
 
   selectedFile: any;
   urlLink: string = 'assets/profile-pic.png';
@@ -51,14 +49,13 @@ export class AddEmployeeComponent implements OnInit {
   ) {
     this.employeeForm = this.fb.group({
       generalDetails: this.fb.group({
-        profilePhoto: '',
         departmentName: '',
         roleName: '',
         joiningDate: '',
       }),
       personalDetails: this.fb.group({
         fullName: ['', Validators.required],
-        dateOfBirth:'' ,
+        dateOfBirth: '',
         langauge: '',
         skills: ['', Validators.required],
         role: ['', Validators.required],
@@ -92,7 +89,11 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Edit Data in ngOnInit', this.data);
+    if (this.data) {
+      this.employeeForm.disable();
+      this.showFullName = true;
+    }
+    // console.log('Edit Data in ngOnInit', this.data);
     this.employeeForm.patchValue(this.data);
 
     this.dropdownList = this.getData();
@@ -111,7 +112,7 @@ export class AddEmployeeComponent implements OnInit {
   getData(): Array<any> {
     return [
       { id: 1, itemText: 'Wireframes' },
-      { id: 2, itemText: 'Prototype' }, 
+      { id: 2, itemText: 'Prototype' },
     ];
   }
 
@@ -122,20 +123,30 @@ export class AddEmployeeComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.urlLink = reader.result as string;
-        this.employeeForm
-          .get('generalDetails.profilePhoto')
-          ?.setValue(this.urlLink);
+        // this.employeeForm
+        //   .get('generalDetails.profilePhoto')
+        //   ?.setValue(this.urlLink);
       };
       reader.readAsDataURL(this.selectedFile);
     } else {
-      this.employeeForm.get('generalDetails.profilePhoto')?.setValue(null);
+      // this.employeeForm.get('generalDetails.profilePhoto')?.setValue(null);
       this.urlLink = '';
     }
     console.log(event.target.files);
-   
   }
 
-  //Code for adding employee
+  //enable edit
+  onEditPersonalForm() {
+    this.employeeForm.get('personalDetails')?.enable();
+    this.employeeForm.get('generalDetails')?.enable();
+    this.isDropdownVisible= false;
+  }
+
+  onEditContactForm() {
+    this.employeeForm.get('contactDetails')?.enable();
+  }
+
+  //Code for updating employee
   onFormSubmit() {
     if (this.data) {
       console.log(this.data.id);
@@ -153,13 +164,10 @@ export class AddEmployeeComponent implements OnInit {
         });
       console.log(this.employeeForm.value);
     } else {
-
-
       const payLoad = this.employeeForm.getRawValue();
       console.log(payLoad);
-      console.log("Employee Form",this.employeeForm.value);
-      
-      
+      console.log('Employee Form', this.employeeForm.value);
+
       this.empService.addDataInArray(this.employeeForm.value);
       this.empService.addEmployee(this.employeeForm.value).subscribe({
         next: (response: any) => {
